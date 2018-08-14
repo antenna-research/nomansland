@@ -4,7 +4,7 @@ import {
 } from 'routing-controllers'
 import User from '../users/entity'
 import { Game, Player, Board } from './entities'
-import {IsBoard, isValidTransition, calculateWinner, finished} from './logic'
+import {IsBoard, isValidTransition, didPlayerLose, finished} from './logic'
 import { Validate } from 'class-validator'
 import {io} from '../index'
 
@@ -83,33 +83,25 @@ export default class GameController {
     if (!game) throw new NotFoundError(`Game does not exist`)
 
     const player = await Player.findOne({ user, game })
+    const otherPlayer = game.players[0] === player ? game.players[1] : game.players[0]
 
     if (!player) throw new ForbiddenError(`You are not part of this game`)
     if (game.status !== 'started') throw new BadRequestError(`The game is not started yet`)
 
-    if (player !== game.turn) throw new BadRequestError(`It's not your turn`)
+    if (player !== game.currentPlayer) throw new BadRequestError(`It's not your turn`)
 
     if (!isValidTransition(player.symbol, game.board, update.board)) {
       throw new BadRequestError(`Invalid move`)
     }
 
-    const winner = calculateWinner(update.board)
-    if (winner) {
-      game.winner = winner
-      game.status = 'finished'
-    }
-    else if (finished(update.board)) {
+    const playerLost = didPlayerLose(update.board)
+
+    if (playerLost) {
+      game.winner = otherPlayer
       game.status = 'finished'
     }
     else {
-
-      // FIND, SET OTHER PLAYER
-      if (game.players[0] === player) {
-        game.turn = player[1]
-      } else {
-        game.turn = players[0]
-      }
-
+      game.currentPlayer = otherPlayer
     }
     game.board = update.board
     await game.save()
