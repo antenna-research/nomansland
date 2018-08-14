@@ -1,5 +1,5 @@
 import { ValidatorConstraint, ValidatorConstraintInterface } from 'class-validator'
-import { Board, Game } from './entities' // Symbol Row
+import { Board } from './entities' // Symbol Row
 import flatten from 'lodash/flatten';
 
 @ValidatorConstraint()
@@ -30,16 +30,22 @@ export const isValidTransition = (from: Board, to: Board) => {
 }
 
      // was: calculateWinner
-export const didPlayerLose = (board: Board): boolean =>
+export const didPlayerLose = (board) =>
   flatten(board).includes("X")
 
-// export const finished = (board: Board): boolean =>
-//   board
-//     .reduce((a,b) => a.concat(b) as Row)
-//     .every(symbol => symbol !== null)
 
-export const layMines = (game: Game): Game => {
-  const board = game.board;
-  board[0][0] = '*';
+export const layMines = (game) => {
+  // console.log('flatten(game.board).length', flatten(game.board).length)
+  for (let i = 0; i < game.board.length; ++i) {
+    for (var j = 0; j < game.board[i].length; ++j) {
+      if (Math.random() < 0.2) {
+        game.board[i][j] = '*'
+      }
+    }
+  }
   return game
 }
+
+
+
+
