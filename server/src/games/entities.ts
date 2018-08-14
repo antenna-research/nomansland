@@ -1,4 +1,4 @@
-import { BaseEntity, PrimaryGeneratedColumn, Column, Entity, Index, OneToMany, ManyToOne } from 'typeorm'
+import { BaseEntity, PrimaryGeneratedColumn, Column, JoinColumn, Entity, Index, OneToOne, OneToMany, ManyToOne } from 'typeorm'
 import User from '../users/entity'
 
 export type Symbol = 'o' | '*' | 'O' | 'X'
@@ -23,8 +23,10 @@ export class Game extends BaseEntity {
   @JoinColumn()
   currentPlayer: Player
 
-  @Column('char', {length:1, nullable: true})
-  winner: Symbol
+  @OneToOne(_ => Player)
+  @JoinColumn()
+  // @Column('char', {length:1, nullable: true})
+  winner: Player
 
   @Column('text', {default: 'pending'})
   status: Status

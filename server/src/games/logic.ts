@@ -1,5 +1,5 @@
 import { ValidatorConstraint, ValidatorConstraintInterface } from 'class-validator'
-import { Board, Symbol, Row } from './entities'
+import { Board, Game } from './entities' // Symbol Row
 import flatten from 'lodash/flatten';
 
 @ValidatorConstraint()
@@ -15,7 +15,7 @@ export class IsBoard implements ValidatorConstraintInterface {
   }
 }
 
-export const isValidTransition = (playerSymbol: Symbol, from: Board, to: Board) => {
+export const isValidTransition = (from: Board, to: Board) => {
   const changes = from
     .map(
       (row, rowIndex) => row.map((symbol, columnIndex) => ({
@@ -31,7 +31,7 @@ export const isValidTransition = (playerSymbol: Symbol, from: Board, to: Board) 
 
      // was: calculateWinner
 export const didPlayerLose = (board: Board): boolean =>
-  return board.flatten.includes("X")
+  flatten(board).includes("X")
 
 // export const finished = (board: Board): boolean =>
 //   board

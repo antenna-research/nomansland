@@ -4,7 +4,7 @@ import {
 } from 'routing-controllers'
 import User from '../users/entity'
 import { Game, Player, Board } from './entities'
-import {IsBoard, isValidTransition, didPlayerLose, layMines} from './logic'
+import {IsBoard, isValidTransition, didPlayerLose } from './logic'
 import { Validate } from 'class-validator'
 import { io } from '../index'
 
@@ -34,11 +34,14 @@ export default class GameController {
 
     let game = await Game.findOneById(entity.id)
     // const gameStart = layMines(game)
-    game.board[0][0] = '*'
+
+    if (game && game.board && game.board[0] && game.board[0][0]) {
+      game.board[0][0] = '*'
+    }
 
     io.emit('action', {
       type: 'ADD_GAME',
-      payload: gameStart
+      payload: game
     })
 
     return game
@@ -92,7 +95,7 @@ export default class GameController {
 
     if (player !== game.currentPlayer) throw new BadRequestError(`It's not your turn`)
 
-    if (!isValidTransition(player.symbol, game.board, update.board)) {
+    if (!isValidTransition(game.board, update.board)) {
       throw new BadRequestError(`Invalid move`)
     }
 
