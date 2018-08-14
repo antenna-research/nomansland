@@ -4,7 +4,7 @@ import {
 } from 'routing-controllers'
 import User from '../users/entity'
 import { Game, Player, Board } from './entities'
-import {IsBoard, isValidTransition, didPlayerLose } from './logic'
+import {IsBoard, isValidTransition, didPlayerLose, layMines } from './logic'
 import { Validate } from 'class-validator'
 import { io } from '../index'
 
@@ -33,18 +33,20 @@ export default class GameController {
     }).save()
 
     let game = await Game.findOneById(entity.id)
+
     // const gameStart = layMines(game)
 
-    console.log('game.board', game.board)
     if (game && game.board && game.board[0] && game.board[0][0]) {
-      game.board[0][0] = '*'
-      console.log('game.board init!', game.board)
+      // game.board[0][0] = '*'
+      layMines(game)
       const currentPlayerId = await newPlayer.id
       if (typeof currentPlayerId === 'number') {
         game.currentPlayer = currentPlayerId
       }
     }
-    game.save()      
+    game.save()
+
+    console.log('game.board', game.board)
 
     io.emit('action', {
       type: 'ADD_GAME',

@@ -22,13 +22,15 @@ class GameDetails extends PureComponent {
   makeMove = (toRow, toCell) => {
     const {game, updateGame} = this.props
 
-    const board = game.board.map(
-      (row, rowIndex) => row.map((cell, cellIndex) => {
-        if (rowIndex === toRow && cellIndex === toCell) return game.turn
-        else return cell
-      })
-    )
-    updateGame(game.id, board)
+    if (game.board[toRow][toCell] === 'o') {
+      game.board[toRow][toCell] = 'O'
+      updateGame(game.id, game.board)
+    }
+    else if (game.board[toRow][toCell] === '*') {
+      game.board[toRow][toCell] = 'X'
+      updateGame(game.id, game.board)
+    }
+
   }
 
 
