@@ -6,7 +6,7 @@ import User from '../users/entity'
 import { Game, Player, Board } from './entities'
 import {IsBoard, isValidTransition, didPlayerLose, finished} from './logic'
 import { Validate } from 'class-validator'
-import {io} from '../index'
+import { io } from '../index'
 
 class GameUpdate {
 

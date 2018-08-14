@@ -30,8 +30,7 @@ export const isValidTransition = (playerSymbol: Symbol, from: Board, to: Board) 
 }
 
      // was: calculateWinner
-export const didPlayerLose = (board: Board, player: Player): boolean =>
-  playerLost = false
+export const didPlayerLose = (board: Board): boolean =>
   return board.flatten.includes("X")
 
 export const finished = (board: Board): boolean =>
