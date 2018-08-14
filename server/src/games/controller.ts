@@ -27,7 +27,7 @@ export default class GameController {
   ) {
     const entity = await Game.create().save()
 
-    await Player.create({
+    const newPlayer = await Player.create({
       game: entity,
       user
     }).save()
@@ -37,6 +37,10 @@ export default class GameController {
 
     if (game && game.board && game.board[0] && game.board[0][0]) {
       game.board[0][0] = '*'
+      const currentPlayerId = await newPlayer.id
+      if (typeof currentPlayerId === 'number') {
+        game.currentPlayer = currentPlayerId
+      }
     }
 
     io.emit('action', {
@@ -93,7 +97,7 @@ export default class GameController {
     if (!player) throw new ForbiddenError(`You are not part of this game`)
     if (game.status !== 'started') throw new BadRequestError(`The game is not started yet`)
 
-    if (player !== game.currentPlayer) throw new BadRequestError(`It's not your turn`)
+    if (player.id !== game.currentPlayer) throw new BadRequestError(`It's not your turn`)
 
     if (!isValidTransition(game.board, update.board)) {
       throw new BadRequestError(`Invalid move`)
@@ -101,12 +105,12 @@ export default class GameController {
 
     const playerLost = didPlayerLose(update.board)
 
-    if (playerLost) {
-      game.winner = otherPlayer
+    if (playerLost && typeof otherPlayer.id === 'number') {
+      game.winner = otherPlayer.id
       game.status = 'finished'
     }
-    else {
-      game.currentPlayer = otherPlayer
+    else if (typeof otherPlayer.id === 'number') {
+      game.currentPlayer = otherPlayer.id
     }
     game.board = update.board
     await game.save()

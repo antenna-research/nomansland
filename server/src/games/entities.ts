@@ -1,4 +1,4 @@
-import { BaseEntity, PrimaryGeneratedColumn, Column, JoinColumn, Entity, Index, OneToOne, OneToMany, ManyToOne } from 'typeorm'
+import { BaseEntity, PrimaryGeneratedColumn, Column, Entity, Index, OneToMany, ManyToOne } from 'typeorm'
 import User from '../users/entity'
 
 export type Symbol = 'o' | '*' | 'O' | 'X'
@@ -19,14 +19,11 @@ export class Game extends BaseEntity {
   @Column('json', {default: emptyBoard})
   board: Board
 
-  @OneToOne(_ => Player)
-  @JoinColumn()
-  currentPlayer: Player
+  @Column('text', {default: 0, nullable: true})
+  currentPlayer: any
 
-  @OneToOne(_ => Player)
-  @JoinColumn()
-  // @Column('char', {length:1, nullable: true})
-  winner: Player
+  @Column('text', {default: 0, nullable: true})
+  winner: any
 
   @Column('text', {default: 'pending'})
   status: Status
@@ -39,7 +36,7 @@ export class Game extends BaseEntity {
 
 
 @Entity()
-@Index(['game', 'user', 'symbol'], {unique:true})
+@Index(['game', 'user'], {unique:true})
 export class Player extends BaseEntity {
 
   @PrimaryGeneratedColumn()
