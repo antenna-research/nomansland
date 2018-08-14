@@ -5,7 +5,7 @@ import { Board, Symbol, Row } from './entities'
 export class IsBoard implements ValidatorConstraintInterface {
 
   validate(board: Board) {
-    const symbols = [ 'x', 'o', null ]
+    const symbols = [ '*', 'o', 'O', 'X' ]
     return board.length === 3 &&
       board.every(row =>
         row.length === 3 &&
@@ -25,9 +25,7 @@ export const isValidTransition = (playerSymbol: Symbol, from: Board, to: Board) 
     .reduce((a,b) => a.concat(b))
     .filter(change => change.from !== change.to)
 
-  return changes.length === 1 && 
-    changes[0].to === playerSymbol && 
-    changes[0].from === null
+  return changes.length === 1
 }
 
 export const calculateWinner = (board: Board): Symbol | null =>

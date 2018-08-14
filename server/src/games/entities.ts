@@ -1,13 +1,13 @@
 import { BaseEntity, PrimaryGeneratedColumn, Column, Entity, Index, OneToMany, ManyToOne } from 'typeorm'
 import User from '../users/entity'
 
-export type Symbol = 'x' | 'o'
-export type Row = [ Symbol | null, Symbol | null, Symbol | null ]
+export type Symbol = 'o' | '*' | 'O' | 'X'
+export type Row = [ Symbol, Symbol, Symbol ]
 export type Board = [ Row, Row, Row ]
 
 type Status = 'pending' | 'started' | 'finished'
 
-const emptyRow: Row = [null, null, null]
+const emptyRow: Row = ['o', 'o', 'o']
 const emptyBoard: Board = [ emptyRow, emptyRow, emptyRow ]
 
 @Entity()
@@ -19,8 +19,9 @@ export class Game extends BaseEntity {
   @Column('json', {default: emptyBoard})
   board: Board
 
-  @Column('char', {length:1, default: 'x'})
-  turn: Symbol
+  @OneToOne(_ => Player)
+  @JoinColumn()
+  currentPlayer: Player
 
   @Column('char', {length:1, nullable: true})
   winner: Symbol
@@ -50,7 +51,4 @@ export class Player extends BaseEntity {
 
   @Column()
   userId: number
-
-  @Column('char', {length: 1})
-  symbol: Symbol
 }
