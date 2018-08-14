@@ -35,13 +35,16 @@ export default class GameController {
     let game = await Game.findOneById(entity.id)
     // const gameStart = layMines(game)
 
+    console.log('game.board', game.board)
     if (game && game.board && game.board[0] && game.board[0][0]) {
       game.board[0][0] = '*'
+      console.log('game.board init!', game.board)
       const currentPlayerId = await newPlayer.id
       if (typeof currentPlayerId === 'number') {
         game.currentPlayer = currentPlayerId
       }
     }
+    game.save()      
 
     io.emit('action', {
       type: 'ADD_GAME',
