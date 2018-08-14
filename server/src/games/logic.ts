@@ -33,7 +33,13 @@ export const isValidTransition = (playerSymbol: Symbol, from: Board, to: Board) 
 export const didPlayerLose = (board: Board): boolean =>
   return board.flatten.includes("X")
 
-export const finished = (board: Board): boolean =>
-  board
-    .reduce((a,b) => a.concat(b) as Row)
-    .every(symbol => symbol !== null)
+// export const finished = (board: Board): boolean =>
+//   board
+//     .reduce((a,b) => a.concat(b) as Row)
+//     .every(symbol => symbol !== null)
+
+export const layMines = (game: Game): Game => {
+  const board = game.board;
+  board[0][0] = '*';
+  return game
+}
