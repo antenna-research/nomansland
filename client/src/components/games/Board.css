@@ -1,4 +1,19 @@
 .board-tile {
   height: 50px;
   width: 50px;
+  border-width: 0px;
+}
+
+#gameBoard {
+  display: inline-block;
+  background-color: green;
+}
+
+.covered {
+  background-color: #000000;
+  opacity: 0.1;
+}
+
+.uncovered {
+  opacity: 0;
 }

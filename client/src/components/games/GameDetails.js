@@ -55,7 +55,6 @@ class GameDetails extends PureComponent {
       <h1>Game #{game.id}</h1>
 
       <p>Status: {game.status}</p>
-      <p>{player && player.id} === {game.currentPlayer}, {game.status}</p>
       {
         game.status === 'started' &&
         player && player.id == game.currentPlayer &&
@@ -77,7 +76,7 @@ class GameDetails extends PureComponent {
 
       {
         game.status !== 'pending' &&
-        <Board board={game.board} makeMove={this.makeMove} />
+        <div id="gameBoard"><Board board={game.board} makeMove={this.makeMove} /></div>
       }
     </Paper>)
   }
