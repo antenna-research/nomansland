@@ -4,7 +4,7 @@ import {
 } from 'routing-controllers'
 import User from '../users/entity'
 import { Game, Player, Board } from './entities'
-import {IsBoard, isValidTransition, didPlayerLose, layMines } from './logic'
+import {IsBoard, layMines, didPlayerLose } from './logic'  // , isValidTransition
 import { Validate } from 'class-validator'
 import { io } from '../index'
 
@@ -37,7 +37,7 @@ export default class GameController {
     // const gameStart = layMines(game)
 
     if (game && game.board && game.board[0] && game.board[0][0]) {
-      // game.board[0][0] = '*'
+
       layMines(game)
       const currentPlayerId = await newPlayer.id
       if (typeof currentPlayerId === 'number') {
@@ -45,8 +45,6 @@ export default class GameController {
       }
     }
     game.save()
-
-    console.log('game.board', game.board)
 
     io.emit('action', {
       type: 'ADD_GAME',
@@ -97,16 +95,12 @@ export default class GameController {
     if (!game) throw new NotFoundError(`Game does not exist`)
 
     const player = await Player.findOne({ user, game })
-    const otherPlayer = game.players[0] === player ? game.players[1] : game.players[0]
+    const otherPlayer = game.players[0].id == game.currentPlayer ? game.players[1] : game.players[0]
 
     if (!player) throw new ForbiddenError(`You are not part of this game`)
     if (game.status !== 'started') throw new BadRequestError(`The game is not started yet`)
 
-    if (player.id !== game.currentPlayer) throw new BadRequestError(`It's not your turn`)
-
-    if (!isValidTransition(game.board, update.board)) {
-      throw new BadRequestError(`Invalid move`)
-    }
+    if (player.id != game.currentPlayer) throw new BadRequestError(`It's not your turn`)
 
     const playerLost = didPlayerLose(update.board)
 
@@ -114,7 +108,7 @@ export default class GameController {
       game.winner = otherPlayer.id
       game.status = 'finished'
     }
-    else if (typeof otherPlayer.id === 'number') {
+    else {
       game.currentPlayer = otherPlayer.id
     }
     game.board = update.board
@@ -142,4 +136,3 @@ export default class GameController {
     return Game.find()
   }
 }
-

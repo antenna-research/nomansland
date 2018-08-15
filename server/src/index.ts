@@ -11,6 +11,7 @@ import {Server} from 'http'
 import * as IO from 'socket.io'
 import * as socketIoJwtAuth from 'socketio-jwt-auth'
 import {secret} from './jwt'
+import '@koa/cors'
 
 const app = new Koa()
 const server = new Server(app.callback())
