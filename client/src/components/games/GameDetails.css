@@ -4,3 +4,9 @@
   padding: 20px;
   width: 60%;
 }
+
+.board-design {
+  background-image: url("../images/img_forest.jpg");
+  opacity: 0.2;
+  position: relative;
+}
