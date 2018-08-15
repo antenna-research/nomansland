@@ -5,14 +5,20 @@
   color: transparent;
   background-color: #000000;
 }
-
 #gameBoard {
   display: inline-block;
-  background-color: green;
+  background-image: url("../images/img_forest.jpg")
+
 }
 
 .covered {
+<<<<<<< HEAD
   opacity: 0.1;
+=======
+  
+  opacity: 0.5
+ 
+>>>>>>> master
 }
 
 .uncovered {
