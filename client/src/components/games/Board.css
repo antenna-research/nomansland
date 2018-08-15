@@ -2,3 +2,18 @@
   height: 50px;
   width: 50px;
 }
+#gameBoard {
+  display: inline-block;
+  background-image: url("../images/img_forest.jpg")
+
+}
+
+.covered {
+  
+  opacity: 0.5
+ 
+}
+
+.uncovered {
+  opacity: 0;
+}
