@@ -1,6 +1,7 @@
 .board-tile {
   height: 50px;
   width: 50px;
+  border-width: 0px;
 }
 #gameBoard {
   display: inline-block;
