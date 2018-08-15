@@ -22,17 +22,28 @@ class GameDetails extends PureComponent {
   makeMove = (toRow, toCell) => {
     const {game, updateGame} = this.props
 
+    const playerSymbol = game.players[0].id == game.currentPlayer ? '1' : '2'
+
+    for (var i = 0; i < game.board.length; i++) {
+      for (var j = 0; j < game.board[i].length; j++) {
+        if (game.board[i][j] === playerSymbol) {
+          game.board[i][j] = 'O'
+        }
+      }
+    }
+
     if (game.board[toRow][toCell] === 'o') {
-      game.board[toRow][toCell] = 'O'
+      game.board[toRow][toCell] = playerSymbol.toString()
+      console.log('game.board', game.board)
       updateGame(game.id, game.board)
     }
     else if (game.board[toRow][toCell] === '*') {
       game.board[toRow][toCell] = 'X'
+      console.log('game.board', game.board)
       updateGame(game.id, game.board)
     }
 
   }
-
 
 
   render() {
