@@ -55,10 +55,10 @@ class GameDetails extends PureComponent {
       <h1>Game #{game.id}</h1>
 
       <p>Status: {game.status}</p>
-
+      <p>{player && player.id} === {game.currentPlayer}, {game.status}</p>
       {
         game.status === 'started' &&
-        player && player.symbol === game.turn &&
+        player && player.id == game.currentPlayer &&
         <div>It's your turn!</div>
       }
 

@@ -79,5 +79,5 @@ export const updateGame = (gameId, board) => (dispatch, getState) => {
     .set('Authorization', `Bearer ${jwt}`)
     .send({ board })
     .then(_ => dispatch(updateGameSuccess()))
-    .catch(err => console.error(err))
+    .catch(err => console.error('err'))
 }
