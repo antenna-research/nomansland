@@ -1,8 +1,8 @@
 import { BaseEntity, PrimaryGeneratedColumn, Column, Entity, Index, OneToMany, ManyToOne } from 'typeorm'
 import User from '../users/entity'
 
-export type Symbol = 'o' | '*' | 'O' | 'X'
-export type Row = [ Symbol, Symbol, Symbol ]
+export type Symbol = 'o' | '*' | 'O' | 'X' | 'A' | 'B'
+export type Row = string[]  // [ Symbol, Symbol, Symbol ]
 export type Board = [ Row, Row, Row ]
 
 type Status = 'pending' | 'started' | 'finished'
