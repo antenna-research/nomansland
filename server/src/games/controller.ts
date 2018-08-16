@@ -4,7 +4,7 @@ import {
 } from 'routing-controllers'
 import User from '../users/entity'
 import { Game, Player, Board } from './entities'
-import {IsBoard, prepareBoard, didPlayerLose } from './logic'  // , isValidTransition
+import {IsBoard, prepareBoard, didPlayerLose, didPlayerWin } from './logic'  // , isValidTransition
 import { Validate } from 'class-validator'
 import { io } from '../index'
 
@@ -96,6 +96,7 @@ export default class GameController {
 
     const player = await Player.findOne({ user, game })
     const otherPlayer = game.players[0].id == game.currentPlayer ? game.players[1] : game.players[0]
+    const whichPlayer = game.players[0].id == game.currentPlayer ? '1' : '2'
 
     if (!player) throw new ForbiddenError(`You are not part of this game`)
     if (game.status !== 'started') throw new BadRequestError(`The game is not started yet`)
@@ -103,9 +104,14 @@ export default class GameController {
     if (player.id != game.currentPlayer) throw new BadRequestError(`It's not your turn`)
 
     const playerLost = didPlayerLose(update.board)
+    const playerWon = didPlayerWin(update.board, whichPlayer)
 
     if (playerLost && typeof otherPlayer.id === 'number') {
       game.winner = otherPlayer.id
+      game.status = 'finished'
+    }
+    if (playerWon && typeof otherPlayer.id === 'number') {
+      game.winner = game.currentPlayer
       game.status = 'finished'
     }
     else {
