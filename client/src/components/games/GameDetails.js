@@ -76,13 +76,9 @@ class GameDetails extends PureComponent {
 
       {
         game.status !== 'pending' &&
-<<<<<<< HEAD
-        <div id="gameBoard" ><Board  board={game.board} makeMove={this.makeMove} /></div>
-=======
 
         <div id="gameBoard"><Board board={game.board} makeMove={this.makeMove} /></div>
 
->>>>>>> 24ff40189f632095977fe95a415486113c8f0aaf
       }
     </Paper>)
   }
