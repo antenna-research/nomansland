@@ -29,17 +29,23 @@ export const isValidTransition = (from: Board, to: Board) => {
   return changes.length === 1
 }
 
-     // was: calculateWinner
 export const didPlayerLose = (board) => {
   return _.flatten(board).includes("X")
 }
 
+export const didPlayerWin = (board, player) => {
+  if (player === '1') {
+    return board[board.length-1].includes('1')
+  } else {
+    return board[0].includes('2')
+  }
+}
 
 export const prepareBoard = (game) => {
 
   for (let i = 0; i < game.board.length; ++i) {
     for (var j = 0; j < game.board[i].length; ++j) {
-      if (Math.random() < 0.2) {
+      if (Math.random() < 0.001) {
         game.board[i][j] = '*'
       }
     }
