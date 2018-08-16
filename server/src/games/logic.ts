@@ -6,7 +6,7 @@ import * as _ from 'lodash';
 export class IsBoard implements ValidatorConstraintInterface {
 
   validate(board: Board) {
-    const symbols = [ '*', 'o', 'O', 'X' ]
+    const symbols = [ '*', 'o', 'O', 'X', '1', '2' ]
     return board.length === 15 &&
       board.every(row =>
         row.length === 15 &&
