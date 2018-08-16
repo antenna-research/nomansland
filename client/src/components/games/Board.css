@@ -5,14 +5,15 @@
   color: transparent;
   background-color: #000000;
 }
+
 #gameBoard {
   display: inline-block;
-  background-image: url("../images/img_forest.jpg")
-
+  background-image: url("../images/bali.png")
 }
 
 .covered {
-  opacity: 0.5
+  background-color: black;
+  opacity: 0.6;
 }
 
 .uncovered {
