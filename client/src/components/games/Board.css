@@ -99,15 +99,15 @@
 
     @keyframes colorchange
     {
-      0%   {stroke: violet;}
-      70%  {stroke: violet;}
+      0%   {stroke: #FE71FE;}
+      70%  {stroke: #FE71FE;}
       100% {stroke: #FF0000;}
     }
 
     @-webkit-keyframes colorchange /* Safari and Chrome - necessary duplicate */
     {
-      0%   {stroke: violet;}
-      70%  {stroke: violet;}
+      0%   {stroke: #FE71FE;}
+      70%  {stroke: #FE71FE;}
       100% {stroke: #FF0000;}
     }
 
@@ -118,15 +118,15 @@
 
     @keyframes colorchange
     {
-      0%   {stroke: violet;}
-      20%  {stroke: violet;}
+      0%   {stroke: #FE71FE;}
+      20%  {stroke: #FE71FE;}
       100% {stroke: #FF0000;}
     }
 
     @-webkit-keyframes colorchange /* Safari and Chrome - necessary duplicate */
     {
-      0%   {stroke: violet;}
-      20%  {stroke: violet;}
+      0%   {stroke: #FE71FE;}
+      20%  {stroke: #FE71FE;}
       100% {stroke: #FF0000;}
     }
 
