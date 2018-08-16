@@ -2,7 +2,7 @@ import React from 'react'
 import './Board.css'
 import * as _ from 'lodash';
 
-const renderCel = (makeMove, rowIndex, cellIndex, symbol, playerAccess, currentPlayer) => {
+const renderCel = (makeMove, rowIndex, cellIndex, symbol, playerAccess, currentPlayer, dangerLevel) => {
 
   // css class for whether square has been visited / uncovered
   const covered = ['*','o'].includes(symbol) ? ' covered' : ' uncovered'
@@ -13,15 +13,17 @@ const renderCel = (makeMove, rowIndex, cellIndex, symbol, playerAccess, currentP
   if (symbol == '2') { player = ' player2' }
 
   // determine available range of movement
-  let access = ''
-  if (playerAccess) { access = ' allowPlayer' + currentPlayer }
-  // if (playerAccess[0] && !playerAccess[1]) { access = ' allowPlayer1' }
-  // if (!playerAccess[0] && playerAccess[1]) { access = ' allowPlayer1' }
-  // if (playerAccess[0] && playerAccess[1]) { access = ' allowBoth' }
+  let orb = ''
+  if (playerAccess) {
+    if (dangerLevel === 1) { orb = ' player' + currentPlayer + '-mid' }
+    else if (dangerLevel === 2) { orb = ' player' + currentPlayer + '-high' }
+    else { orb = ' player' + currentPlayer + '-low' }
+  }
+  console.log('dangerLevel', dangerLevel)
 
   return (<span key={`${rowIndex}-${cellIndex}`}>
     <button
-      className={ 'board-tile' + covered + player + access }
+      className={ 'board-tile' + covered + player + orb }
       disabled={!playerAccess}
       onClick={() => makeMove(rowIndex, cellIndex)}
     >·</button>
@@ -88,20 +90,66 @@ const findPlayerRanges = (board) => {
   )
 
   return rangeMap
-
 }
+
+
+// determine available range of movement
+const findDangerLevels = (board) => {
+
+  let dangerLevels = { '1':0, '2':0 }
+
+  const level1Orb = [ [-2,-2],[-2,-1],[-2,0],[-2,1],[-2,2],  [-1,-2],[-1,2],  [0,-2],[0,2],  [1,-2],[1,2],  [2,-2],[2,-1],[2,0],[2,1],[2,2]]
+  const level2Orb = [ [-1,-1], [-1,0], [-1,1],  [0,-1], [0, 1],  [1,-1], [1, 0], [1, 1] ]
+
+  board.forEach(function(row, i) {
+    row.forEach( function(square, j) {
+      if (square === '1' || square === '2') { 
+
+        level1Orb.forEach( function(offset) {
+          const checkX = i+offset[0]
+          const checkY = j+offset[1]
+          if (checkX >= 0 && checkX < board[0].length && checkY >= 0 && checkY<board.length && board[checkX][checkY] === '*') {
+            dangerLevels[square] = 1
+          }
+        })
+
+        level2Orb.forEach( function(offset) {
+          const checkX = i+offset[0]
+          const checkY = j+offset[1]
+          if (checkX >= 0 && checkX < board[0].length && checkY >= 0 && checkY<board.length && board[checkX][checkY] === '*') {
+            dangerLevels[square] = 2
+          }
+        })
+      }
+    })
+  })
+  return dangerLevels
+}
+
 
 
 export default ({currentPlayer, board, makeMove}) => {
 
   const playerRangeMap = findPlayerRanges(board)
-  console.log('currentPlayer', currentPlayer)
+  const dangerLevels = findDangerLevels(board)
+  const dangerLevel = dangerLevels[currentPlayer]
+  // console.log(dangerLevels)
+  // console.log(board)
 
   return board.map((cells, rowIndex) =>
     <div key={rowIndex}>
-      {cells.map((symbol, cellIndex) => renderCel(makeMove, rowIndex, cellIndex,symbol,playerRangeMap[rowIndex][cellIndex][currentPlayer-1],currentPlayer))}
+      {cells.map((symbol, cellIndex) => renderCel(
+        makeMove,
+        rowIndex,
+        cellIndex,
+        symbol,
+        playerRangeMap[rowIndex][cellIndex][currentPlayer-1],
+        currentPlayer,
+        dangerLevel
+      ))}
     </div>
   )
+
 }
 
 
