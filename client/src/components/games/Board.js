@@ -37,7 +37,13 @@ const renderCel = (makeMove, rowIndex, cellIndex, symbol, playerAccess, currentP
       <path d="M8,10 L8,20 L3,30 M8,20 L13,30 M0,15 L15,15"></path>
     </svg>
     }
-  </span>)
+    { symbol == 'X' && 
+    <span id="exploded-mine">
+      &#9785;
+    </span>
+    }
+  </span>
+  )
 }
 // <defs>
 //   <filter id="filter1" x="0" y="0">
