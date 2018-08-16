@@ -1,14 +1,14 @@
 import { BaseEntity, PrimaryGeneratedColumn, Column, Entity, Index, OneToMany, ManyToOne } from 'typeorm'
 import User from '../users/entity'
 
-export type Symbol = 'o' | '*' | 'O' | 'X' | 'A' | 'B'
-export type Row = string[]  // [ Symbol, Symbol, Symbol ]
-export type Board = [ Row, Row, Row ]
+export type Symbol = 'o' | '*' | 'O' | 'X'
+export type Row = [ Symbol, Symbol, Symbol, Symbol, Symbol, Symbol, Symbol, Symbol, Symbol, Symbol, Symbol, Symbol, Symbol, Symbol, Symbol]
+export type Board = [ Row, Row, Row, Row, Row, Row, Row, Row, Row, Row, Row, Row, Row, Row, Row]
 
 type Status = 'pending' | 'started' | 'finished'
 
-const emptyRow: Row = ['o', 'o', 'o']
-const emptyBoard: Board = [ emptyRow, emptyRow, emptyRow ]
+const emptyRow: Row = ['o', 'o', 'o', 'o', 'o', 'o', 'o', 'o', 'o', 'o', 'o', 'o', 'o', 'o', 'o']
+const emptyBoard: Board = [ emptyRow, emptyRow, emptyRow, emptyRow, emptyRow, emptyRow, emptyRow, emptyRow, emptyRow, emptyRow, emptyRow, emptyRow, emptyRow, emptyRow, emptyRow]
 
 @Entity()
 export class Game extends BaseEntity {
