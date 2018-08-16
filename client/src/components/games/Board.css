@@ -1,19 +1,26 @@
-.board-tile {
-  height: 50px;
-  width: 50px;
-  border-width: 0px;
-  color: transparent;
-  background-color: #000000;
-}
-
 #gameBoard {
   display: inline-block;
   background-image: url("../images/bali.png")
 }
 
+.board-tile {
+  height: 50px;
+  width: 50px;
+  border-width: 0px;
+  color: transparent;
+  background-color: #FFF;
+}
+
+#gameBoard .allowPlayer1 {
+  background-color: yellow;
+}
+
+#gameBoard .allowPlayer2 {
+  background-color: violet;
+}
+
 .covered {
-  background-color: black;
-  opacity: 0.6;
+  opacity: 0.4
 }
 
 .uncovered {
@@ -28,10 +35,6 @@
   content: '/EC9B83';  
 }
 
-ls {
-
-}
-
 #gameBoard span {
   position: relative;
 }
@@ -40,7 +43,6 @@ ls {
   width: 35px;
   height: 35px;
   stroke-width: 2;
-  stroke: black;
   fill: transparent;
   position: absolute;
   z-index: 2;
@@ -48,3 +50,13 @@ ls {
   top: -2px;
   left: 18px;
 }
+
+#gameBoard svg.player1 {
+  stroke: yellow;
+}
+
+#gameBoard svg.player2 {
+  stroke: violet;
+}
+
+
