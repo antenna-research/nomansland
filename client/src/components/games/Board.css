@@ -1,6 +1,7 @@
 #gameBoard {
   display: inline-block;
-  background-image: url("../images/forest.jpg")
+  background-image: url("../images/forest.jpg");
+  background-position: center top;
 }
 
 .board-tile {
@@ -8,10 +9,34 @@
   width: 50px;
   border-width: 0px;
   color: transparent;
-  background-color: #FFF;
+  background-color: #000;
 }
 
-#gameBoard .allowPlayer1 {
+#gameBoard .player1-high, #gameBoard .player1-mid, #gameBoard .player1-low {
+  background-color: yellow;
+}
+
+#gameBoard .player2-high, #gameBoard .player2-mid, #gameBoard .player2-low {
+  background-color: violet;
+}
+
+#gameBoard .player1-high, #gameBoard .player2-high {
+  opacity: 0.45
+}
+
+#gameBoard .player1-mid, #gameBoard .player2-mid {
+  opacity: 0.35
+}
+
+#gameBoard .player1-low, #gameBoard .player2-low {
+  opacity: 0.25
+}
+
+#gameBoard .player1-mid {
+  background-color: yellow;
+}
+
+#gameBoard .player1-low {
   background-color: yellow;
 }
 
@@ -20,8 +45,7 @@
 }
 
 .covered {
-  background-color: black;
-  opacity: 0.6;
+  opacity: 0.3
 }
 
 .uncovered {
@@ -41,7 +65,7 @@
   z-index: 2;
   overflow: visible;
   top: -2px;
-  left: 18px;
+  left: 12px;
 }
 
 #gameBoard svg.player1 {
