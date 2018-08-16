@@ -4,7 +4,7 @@ import {
 } from 'routing-controllers'
 import User from '../users/entity'
 import { Game, Player, Board } from './entities'
-import {IsBoard, layMines, didPlayerLose } from './logic'  // , isValidTransition
+import {IsBoard, prepareBoard, didPlayerLose } from './logic'  // , isValidTransition
 import { Validate } from 'class-validator'
 import { io } from '../index'
 
@@ -34,11 +34,10 @@ export default class GameController {
 
     let game = await Game.findOneById(entity.id)
 
-    // const gameStart = layMines(game)
-
     if (game && game.board && game.board[0] && game.board[0][0]) {
 
-      layMines(game)
+      prepareBoard(game)
+
       const currentPlayerId = await newPlayer.id
       if (typeof currentPlayerId === 'number') {
         game.currentPlayer = currentPlayerId

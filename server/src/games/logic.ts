@@ -35,7 +35,7 @@ export const didPlayerLose = (board) => {
 }
 
 
-export const layMines = (game) => {
+export const prepareBoard = (game) => {
 
   for (let i = 0; i < game.board.length; ++i) {
     for (var j = 0; j < game.board[i].length; ++j) {
@@ -44,9 +44,10 @@ export const layMines = (game) => {
       }
     }
   }
+  game.board[0][Math.floor(Math.random() * game.board[0].length)] = '1'
+  game.board[game.board.length-1][Math.floor(Math.random() * game.board[0].length)] = '2'
+
   return game
 }
-
-
 
 
