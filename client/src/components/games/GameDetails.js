@@ -34,12 +34,11 @@ class GameDetails extends PureComponent {
 
     if (game.board[toRow][toCell] === 'o') {
       game.board[toRow][toCell] = playerSymbol.toString()
-      console.log('game.board', game.board)
       updateGame(game.id, game.board)
     }
+
     else if (game.board[toRow][toCell] === '*') {
       game.board[toRow][toCell] = 'X'
-      console.log('game.board', game.board)
       updateGame(game.id, game.board)
     }
 
@@ -57,6 +56,7 @@ class GameDetails extends PureComponent {
     if (!game) return 'Not found'
 
     const player = game.players.find(p => p.userId === userId)
+    const currentPlayer = game.players[0].id == game.currentPlayer ? '1' : '2'
 
     const winner = game.players
       .filter(p => p.symbol === game.winner)
@@ -87,7 +87,7 @@ class GameDetails extends PureComponent {
 
       {
         game.status !== 'pending' &&
-        <div id="gameBoard"><Board board={game.board} makeMove={this.makeMove} /></div>
+        <div id="gameBoard"><Board currentPlayer={currentPlayer} board={game.board} makeMove={this.makeMove} /></div>
       }
     </Paper>)
   }

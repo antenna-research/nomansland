@@ -1,3 +1,8 @@
+#gameBoard {
+  display: inline-block;
+  background-image: url("../images/img_forest.jpg")
+}
+
 .board-tile {
   height: 50px;
   width: 50px;
@@ -5,10 +10,13 @@
   color: transparent;
   background-color: #FFF;
 }
-#gameBoard {
-  display: inline-block;
-  background-image: url("../images/img_forest.jpg")
 
+#gameBoard .allowPlayer1 {
+  background-color: yellow;
+}
+
+#gameBoard .allowPlayer2 {
+  background-color: violet;
 }
 
 .covered {
@@ -35,7 +43,6 @@
   width: 35px;
   height: 35px;
   stroke-width: 2;
-  stroke: yellow;
   fill: transparent;
   position: absolute;
   z-index: 2;
@@ -44,12 +51,12 @@
   left: 18px;
 }
 
-#gameBoard svg.player2 {
-  color: pink;
+#gameBoard svg.player1 {
+  stroke: yellow;
 }
 
 #gameBoard svg.player2 {
-  color: yellow;
+  stroke: violet;
 }
 
 
