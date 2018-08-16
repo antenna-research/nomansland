@@ -12,40 +12,18 @@
   background-color: #000;
 }
 
-#gameBoard .player1-high, #gameBoard .player1-mid, #gameBoard .player1-low {
+#gameBoard .player-1-orb {
   background-color: yellow;
+  opacity: 0.5
 }
 
-#gameBoard .player2-high, #gameBoard .player2-mid, #gameBoard .player2-low {
+#gameBoard .player-2-orb {
   background-color: violet;
-}
-
-#gameBoard .player1-high, #gameBoard .player2-high {
-  opacity: 0.45
-}
-
-#gameBoard .player1-mid, #gameBoard .player2-mid {
-  opacity: 0.35
-}
-
-#gameBoard .player1-low, #gameBoard .player2-low {
-  opacity: 0.25
-}
-
-#gameBoard .player1-mid {
-  background-color: yellow;
-}
-
-#gameBoard .player1-low {
-  background-color: yellow;
-}
-
-#gameBoard .allowPlayer2 {
-  background-color: violet;
+  opacity: 0.5
 }
 
 .covered {
-  opacity: 0.3
+  opacity: 0.4
 }
 
 .uncovered {
@@ -72,9 +50,85 @@
   stroke: yellow;
 }
 
+#gameBoard .medium-danger svg.player1 {
+      animation: colorchange 3000ms infinite alternate;
+      -webkit-animation: colorchange 3000ms infinite alternate;
+    }
+
+    @keyframes colorchange
+    {
+      0%   {stroke: #FFFF00;}
+      70%  {stroke: #FFFF00;}
+      100% {stroke: #FF0000;}
+    }
+
+    @-webkit-keyframes colorchange /* Safari and Chrome - necessary duplicate */
+    {
+      0%   {stroke: #FFFF00;}
+      70%  {stroke: #FFFF00;}
+      100% {stroke: #FF0000;}
+    }
+
+#gameBoard .high-danger svg.player1 {
+      animation: colorchange 500ms infinite alternate;
+      -webkit-animation: colorchange 500ms infinite alternate;
+    }
+
+    @keyframes colorchange
+    {
+      0%   {stroke: #FFFF00;}
+      20%  {stroke: #FFFF00;}
+      100% {stroke: #FF0000;}
+    }
+
+    @-webkit-keyframes colorchange /* Safari and Chrome - necessary duplicate */
+    {
+      0%   {stroke: #FFFF00;}
+      20%  {stroke: #FFFF00;}
+      100% {stroke: #FF0000;}
+    }
+
 #gameBoard svg.player2 {
   stroke: violet;
 }
+
+#gameBoard .medium-danger svg.player2 {
+      animation: colorchange 3000ms infinite alternate;
+      -webkit-animation: colorchange 3000ms infinite alternate;
+    }
+
+    @keyframes colorchange
+    {
+      0%   {stroke: violet;}
+      70%  {stroke: violet;}
+      100% {stroke: #FF0000;}
+    }
+
+    @-webkit-keyframes colorchange /* Safari and Chrome - necessary duplicate */
+    {
+      0%   {stroke: violet;}
+      70%  {stroke: violet;}
+      100% {stroke: #FF0000;}
+    }
+
+#gameBoard .high-danger svg.player2 {
+      animation: colorchange 500ms infinite alternate;
+      -webkit-animation: colorchange 500ms infinite alternate;
+    }
+
+    @keyframes colorchange
+    {
+      0%   {stroke: violet;}
+      20%  {stroke: violet;}
+      100% {stroke: #FF0000;}
+    }
+
+    @-webkit-keyframes colorchange /* Safari and Chrome - necessary duplicate */
+    {
+      0%   {stroke: violet;}
+      20%  {stroke: violet;}
+      100% {stroke: #FF0000;}
+    }
 
 #gameBoard #exploded-mine {
   font-size: 40px;

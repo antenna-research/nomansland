@@ -14,14 +14,14 @@ const renderCel = (makeMove, rowIndex, cellIndex, symbol, playerAccess, currentP
 
   // determine available range of movement
   let orb = ''
-  if (playerAccess) {
-    if (dangerLevel === 1) { orb = ' player' + currentPlayer + '-mid' }
-    else if (dangerLevel === 2) { orb = ' player' + currentPlayer + '-high' }
-    else { orb = ' player' + currentPlayer + '-low' }
-  }
-  console.log('dangerLevel', dangerLevel)
+  if (playerAccess) { orb = ' player-' + currentPlayer + '-orb' }
 
-  return (<span key={`${rowIndex}-${cellIndex}`}>
+  // determine danger level
+  let danger = 'low-danger'
+  if (dangerLevel === 1) { danger = 'medium-danger' }
+  if (dangerLevel === 2) { danger = 'high-danger' }
+
+  return (<span key={`${rowIndex}-${cellIndex}`} className={ danger } >
     <button
       className={ 'board-tile' + covered + player + orb }
       disabled={!playerAccess}
@@ -98,8 +98,8 @@ const findDangerLevels = (board) => {
 
   let dangerLevels = { '1':0, '2':0 }
 
-  const level1Orb = [ [-2,-2],[-2,-1],[-2,0],[-2,1],[-2,2],  [-1,-2],[-1,2],  [0,-2],[0,2],  [1,-2],[1,2],  [2,-2],[2,-1],[2,0],[2,1],[2,2]]
-  const level2Orb = [ [-1,-1], [-1,0], [-1,1],  [0,-1], [0, 1],  [1,-1], [1, 0], [1, 1] ]
+  const level1Orb = [ [-2,-2],[-2,-1],[-2,0],[-2,1],[-2,2],[-1,-2],[-1,2],[0,-2],[0,2],[1,-2],[1,2],[2,-2],[2,-1],[2,0],[2,1],[2,2] ]
+  const level2Orb = [ [-1,-1],[-1,0],[-1,1],[0,-1],[0, 1],[1,-1],[1, 0],[1, 1] ]
 
   board.forEach(function(row, i) {
     row.forEach( function(square, j) {
