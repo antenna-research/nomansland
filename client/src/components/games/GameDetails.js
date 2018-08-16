@@ -49,8 +49,8 @@ class GameDetails extends PureComponent {
     const {game, users, authenticated, userId} = this.props
 
     if (!authenticated) return (
-			<Redirect to="/login" />
-		)
+      <Redirect to="/login" />
+    )
 
     if (game === null || users === null) return 'Loading...'
     if (!game) return 'Not found'
@@ -87,7 +87,7 @@ class GameDetails extends PureComponent {
 
       {
         game.status !== 'pending' &&
-        <div id="gameBoard"><Board board={game.board} makeMove={this.makeMove} /></div>
+        <div id="gameBoard"><Board currentPlayer={currentPlayer} board={game.board} makeMove={this.makeMove} /></div>
       }
     </Paper>)
   }
