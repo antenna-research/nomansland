@@ -1,6 +1,6 @@
 #gameBoard {
   display: inline-block;
-  background-image: url("../images/bali.png")
+  background-image: url("../images/forest.jpg")
 }
 
 .board-tile {
@@ -27,14 +27,6 @@
   opacity: 0;
 }
 
-.player1:after {
-  content: '/EC9B83';
-}
-
-.player2:after {
-  content: '/EC9B83';  
-}
-
 #gameBoard span {
   position: relative;
 }
@@ -59,4 +51,14 @@
   stroke: violet;
 }
 
-
+#gameBoard #exploded-mine {
+  font-size: 40px;
+  color: lightsalmon;
+  position: absolute;
+  z-index: 2;
+  overflow: visible;
+  top: -8px;
+  left: 10px;
+  font-weight: normal;
+  text-shadow: 1px 1px 2px red, 0 0 1em blue, 0 0 0.2em;
+}
