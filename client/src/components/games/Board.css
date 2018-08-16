@@ -20,7 +20,8 @@
 }
 
 .covered {
-  opacity: 0.4
+  background-color: black;
+  opacity: 0.6;
 }
 
 .uncovered {
