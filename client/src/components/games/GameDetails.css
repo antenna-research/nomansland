@@ -10,5 +10,13 @@
 }
 
 .message {
-  color: green;
+  color: #00FF00;
+  font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+  font-size: 15px;
+  font-weight: bold;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+
+
 }
