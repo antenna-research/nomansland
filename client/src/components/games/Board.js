@@ -1,7 +1,10 @@
 import React from 'react'
 import './Board.css'
+<<<<<<< HEAD
 import * as _ from 'lodash';
 import grenade from './images/grenade_icon.png'
+=======
+>>>>>>> master
 
 const renderCel = (makeMove, rowIndex, cellIndex, symbol, playerAccess, currentPlayer, dangerLevel, gameStatus) => {
 
@@ -12,6 +15,9 @@ const renderCel = (makeMove, rowIndex, cellIndex, symbol, playerAccess, currentP
   let player = ''
   if (symbol == '1') { player = ' player1' }
   if (symbol == '2') { player = ' player2' }
+
+  let isCurrentPlayer = ''
+  if (symbol == currentPlayer) { isCurrentPlayer = ' currentPlayer' }
 
   // determine available range of movement
   let orb = ''
@@ -29,13 +35,13 @@ const renderCel = (makeMove, rowIndex, cellIndex, symbol, playerAccess, currentP
       onClick={() => makeMove(rowIndex, cellIndex)}
     >·</button>
     { symbol == '2' && 
-    <svg viewBox="0 0 25 50" className={'player2'}>
+    <svg viewBox="0 0 25 50" className={'player2' + isCurrentPlayer}>
       <circle cx="8" cy="6" r="5" />
       <path d="M8,10 L8,20 L3,30 M8,20 L13,30 M0,15 L15,15"></path>
     </svg>
     }
     { symbol == '1' && 
-    <svg viewBox="0 0 25 50" className={'player1'}>
+    <svg viewBox="0 0 25 50" className={'player1' + isCurrentPlayer}>
       <circle cx="8" cy="6" r="5" />
       <path d="M8,10 L8,20 L3,30 M8,20 L13,30 M0,15 L15,15"></path>
     </svg>
@@ -53,6 +59,7 @@ const renderCel = (makeMove, rowIndex, cellIndex, symbol, playerAccess, currentP
 }
 
 
+<<<<<<< HEAD
 // determine available range of movement
 const findPlayerRanges = (board) => {
 
@@ -127,6 +134,9 @@ const findDangerLevels = (board) => {
 
 
 export default ({currentPlayer, board, makeMove, gameStatus}) => {
+=======
+export default ({currentPlayer, board, makeMove, findDangerLevels, findPlayerRanges}) => {
+>>>>>>> master
 
   const playerRangeMap = findPlayerRanges(board)
   const dangerLevels = findDangerLevels(board)

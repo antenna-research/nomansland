@@ -2,8 +2,8 @@ import { BaseEntity, PrimaryGeneratedColumn, Column, Entity, Index, OneToMany, M
 import User from '../users/entity'
 
 export type Symbol = 'o' | '*' | 'O' | 'X' | '1' | '2'
-export type Row = [ Symbol, Symbol, Symbol, Symbol, Symbol, Symbol, Symbol, Symbol, Symbol, Symbol, Symbol, Symbol, Symbol, Symbol, Symbol]
-export type Board = [ Row, Row, Row, Row, Row, Row, Row, Row, Row, Row, Row, Row, Row, Row, Row]
+export type Row = Symbol[ ]
+export type Board = Row[ ]
 
 type Status = 'pending' | 'started' | 'finished'
 

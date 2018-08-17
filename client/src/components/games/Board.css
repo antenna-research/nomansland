@@ -5,7 +5,8 @@ div#messages {
   position: absolute;
   color: white;
   font-weight: bold;
-  z-index: 3;
+  z-index: 11;
+  top: 0px;
 }
 
 #gameBoard {
@@ -60,83 +61,45 @@ div#messages {
   stroke: yellow;
 }
 
-#gameBoard .medium-danger svg.player1 {
-      animation: colorchange 1500ms infinite alternate;
-      -webkit-animation: colorchange 1500ms infinite alternate;
-    }
-
-    @keyframes colorchange
-    {
-      0%   {stroke: #FFFF00;}
-      88%  {stroke: #FFFF00;}
-      100% {stroke: #FF0000;}
-    }
-
-    @-webkit-keyframes colorchange /* Safari and Chrome - necessary duplicate */
-    {
-      0%   {stroke: #FFFF00;}
-      88%  {stroke: #FFFF00;}
-      100% {stroke: #FF0000;}
-    }
-
-#gameBoard .high-danger svg.player1 {
-      animation: colorchange 250ms infinite;
-      -webkit-animation: colorchange 250ms infinite;
-    }
-
-    @keyframes colorchange
-    {
-      0%   {stroke: #FFFF00;}
-      20%  {stroke: #FFFF00;}
-      100% {stroke: #FF0000;}
-    }
-
-    @-webkit-keyframes colorchange /* Safari and Chrome - necessary duplicate */
-    {
-      0%   {stroke: #FFFF00;}
-      20%  {stroke: #FFFF00;}
-      100% {stroke: #FF0000;}
-    }
-
 #gameBoard svg.player2 {
   stroke: violet;
 }
 
-#gameBoard .medium-danger svg.player2 {
+#gameBoard .medium-danger svg.currentPlayer {
       animation: colorchange 1500ms infinite alternate;
       -webkit-animation: colorchange 1500ms infinite alternate;
     }
 
     @keyframes colorchange
     {
-      0%   {stroke: #FE71FE;}
-      70%  {stroke: #FE71FE;}
+      0%   {stroke: #FFFF00;}
+      88%  {stroke: #FFFF00;}
       100% {stroke: #FF0000;}
     }
 
     @-webkit-keyframes colorchange /* Safari and Chrome - necessary duplicate */
     {
-      0%   {stroke: #FE71FE;}
-      70%  {stroke: #FE71FE;}
+      0%   {stroke: #FFFF00;}
+      88%  {stroke: #FFFF00;}
       100% {stroke: #FF0000;}
     }
 
-#gameBoard .high-danger svg.player2 {
+#gameBoard .high-danger svg.currentPlayer {
       animation: colorchange 250ms infinite;
       -webkit-animation: colorchange 250ms infinite;
     }
 
     @keyframes colorchange
     {
-      0%   {stroke: #FE71FE;}
-      20%  {stroke: #FE71FE;}
+      0%   {stroke: #FFFF00;}
+      20%  {stroke: #FFFF00;}
       100% {stroke: #FF0000;}
     }
 
     @-webkit-keyframes colorchange /* Safari and Chrome - necessary duplicate */
     {
-      0%   {stroke: #FE71FE;}
-      20%  {stroke: #FE71FE;}
+      0%   {stroke: #FFFF00;}
+      20%  {stroke: #FFFF00;}
       100% {stroke: #FF0000;}
     }
 
