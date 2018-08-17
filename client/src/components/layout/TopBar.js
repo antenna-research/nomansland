@@ -10,7 +10,7 @@ import AccountIcon from 'material-ui-icons/AccountBox'
 
 const TopBar = (props) => {
   const { location, history, user } = props
-
+  console.log('props.state', props.state)
   return (
     <AppBar position="absolute" style={{zIndex:10}}>
       <Toolbar>
@@ -45,7 +45,8 @@ const TopBar = (props) => {
 
 const mapStateToProps = state => ({
   user: state.currentUser && state.users &&
-    state.users[userId(state.currentUser.jwt)]
+    state.users[userId(state.currentUser.jwt)],
+  state: state
 })
 
 export default withRouter(
