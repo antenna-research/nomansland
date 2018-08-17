@@ -18,10 +18,14 @@
   font-size: 1.5em;
 }
 
-.App-intro { 
+.App-intro {
   font-size: large;
 }
 
 #root header {
-  background-color: #257939;
+  background-color: #000;
+}
+
+body {
+  background-color: #000;
 }

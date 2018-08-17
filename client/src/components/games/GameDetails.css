@@ -1,12 +1,11 @@
-.outer-paper {
+#root .outer-paper {
   display: flex;
   justify-content: center;
   margin: 0 auto;
   padding: 0px;
   width: 100%;
-  position: relative;
-  top: -74px;
-  z-index: 40;
+  background-color: #000;
+  overflow: visible;
 }
 
 .message {
