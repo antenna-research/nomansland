@@ -58,14 +58,14 @@ class GamesList extends PureComponent {
     if (games === null || users === null) return null
 
     return (<Paper className="outer-paper">
-      <Button
+      <div><Button
         color="primary"
         variant="raised"
         onClick={createGame}
         className="create-game"
       >
         Create Game
-      </Button>
+      </Button></div>
 
       <div>
         {games.map(game => this.renderGame(game))}
