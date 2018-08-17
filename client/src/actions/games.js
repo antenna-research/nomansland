@@ -27,7 +27,6 @@ const joinGameSuccess = () => ({
   type: JOIN_GAME_SUCCESS
 })
 
-
 export const getGames = () => (dispatch, getState) => {
   const state = getState()
   if (!state.currentUser) return null
