@@ -143,8 +143,6 @@ class GameDetails extends PureComponent {
 
     return (<div className="outer-paper">
       <div id="messages">
-       { // <p>Status: {game.status}</p>
-          }
       {
         game.status === 'started' &&
         player && player.id == game.currentPlayer && this.findDangerLevels(game.board)[currentPlayer] === 2 &&
@@ -173,8 +171,7 @@ class GameDetails extends PureComponent {
       </div>
       {
         game.status !== 'pending' &&
-        <div id="gameBoard"><Board currentPlayer={currentPlayer} board={game.board} makeMove={this.makeMove} findDangerLevels={this.findDangerLevels} findPlayerRanges={this.findPlayerRanges}  /> { this.onPlay() }</div>
-        
+        <div id="gameBoard"><Board currentPlayer={currentPlayer} board={game.board} makeMove={this.makeMove} findDangerLevels={this.findDangerLevels} findPlayerRanges={this.findPlayerRanges} gameStatus={game.status} /> { this.onPlay() }</div>        
       }
     </div>)
   }

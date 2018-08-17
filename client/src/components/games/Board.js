@@ -1,7 +1,10 @@
 import React from 'react'
 import './Board.css'
+import * as _ from 'lodash';
+import grenade from './images/grenade_icon.png'
 
-const renderCel = (makeMove, rowIndex, cellIndex, symbol, playerAccess, currentPlayer, dangerLevel) => {
+
+const renderCel = (makeMove, rowIndex, cellIndex, symbol, playerAccess, currentPlayer, dangerLevel, gameStatus) => {
 
   // css class for whether square has been visited / uncovered
   const covered = ['*','o'].includes(symbol) ? ' covered' : ' uncovered'
@@ -46,19 +49,21 @@ const renderCel = (makeMove, rowIndex, cellIndex, symbol, playerAccess, currentP
       &#9785;
     </span>
     }
+    { gameStatus === "finished" && symbol == '*' && 
+    <img class="mine-locations" src={grenade} />
+    }
   </span>
   )
 }
 
-
-export default ({currentPlayer, board, makeMove, findDangerLevels, findPlayerRanges}) => {
+export default ({currentPlayer, board, makeMove, findDangerLevels, findPlayerRanges, gameStatus}) => {
 
   const playerRangeMap = findPlayerRanges(board)
   const dangerLevels = findDangerLevels(board)
   const dangerLevel = dangerLevels[currentPlayer]
   // console.log(dangerLevels)
   // console.log(board)
-
+  console.log('gameStatus', gameStatus)
   return board.map((cells, rowIndex) =>
     <div key={rowIndex}>
       {cells.map((symbol, cellIndex) => renderCel(
@@ -68,7 +73,8 @@ export default ({currentPlayer, board, makeMove, findDangerLevels, findPlayerRan
         symbol,
         playerRangeMap[rowIndex][cellIndex][currentPlayer-1],
         currentPlayer,
-        dangerLevel
+        dangerLevel,
+        gameStatus
       ))}
     </div>
   )
