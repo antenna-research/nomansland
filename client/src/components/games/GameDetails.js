@@ -59,9 +59,8 @@ class GameDetails extends PureComponent {
     const currentPlayer = game.players[0].id == game.currentPlayer ? '1' : '2'
 
     const winner = game.players
-      .filter(p => p.symbol === game.winner)
-      .map(p => p.userId)[0]
-
+      .filter(p => p.id === game.winner).map(p => p.userId)[0]
+      
     return (<Paper className="outer-paper">
       <h1>Game #{game.id}</h1>
 
@@ -80,7 +79,7 @@ class GameDetails extends PureComponent {
 
       {
         winner &&
-        <p>Winner: {users[winner].firstName}</p>
+        <p className="message">Congratulations {users[winner].firstName}!!! You won the game</p>
       }
 
       <hr />
