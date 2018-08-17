@@ -6,10 +6,16 @@ import {getUsers} from '../../actions/users'
 import {userId} from '../../jwt'
 import Paper from 'material-ui/Paper'
 import Board from './Board'
-import './GameDetails.css'
 import * as _ from 'lodash';
+import './GameDetails.css'
+import audio from './thingin.mp3'
 
 class GameDetails extends PureComponent {
+
+
+  onPlay(){
+    this.audio.play()
+  }
 
   componentWillMount() {
     if (this.props.authenticated) {
@@ -19,6 +25,8 @@ class GameDetails extends PureComponent {
   }
 
   joinGame = () => this.props.joinGame(this.props.game.id)
+
+  audio = new Audio(audio);
 
   makeMove = (toRow, toCell) => {
     const {game, updateGame} = this.props
@@ -165,7 +173,8 @@ class GameDetails extends PureComponent {
       </div>
       {
         game.status !== 'pending' &&
-        <div id="gameBoard"><Board currentPlayer={currentPlayer} board={game.board} makeMove={this.makeMove} findDangerLevels={this.findDangerLevels} findPlayerRanges={this.findPlayerRanges}  /></div>
+        <div id="gameBoard"><Board currentPlayer={currentPlayer} board={game.board} makeMove={this.makeMove} findDangerLevels={this.findDangerLevels} findPlayerRanges={this.findPlayerRanges}  /> { this.onPlay() }</div>
+        
       }
     </div>)
   }
