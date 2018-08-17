@@ -45,7 +45,7 @@ export const prepareBoard = (game) => {
 
   for (let i = 0; i < game.board.length; ++i) {
     for (var j = 0; j < game.board[i].length; ++j) {
-      if (Math.random() < 0.08) {
+      if (Math.random() < 0.1) {
         game.board[i][j] = '*'
       }
     }

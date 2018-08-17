@@ -8,10 +8,10 @@
   overflow: visible;
 }
 
-.message {
-  color: #ffffff;
-  font-family: fantasy, sans-serif;
-  font-size: 30px;
+div#messages {
+  position: absolute;
+  color: yellow;
   font-weight: bold;
-  text-align: center;
+  z-index: 11;
+  top: 58px;
 }

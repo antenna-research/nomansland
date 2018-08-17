@@ -7,6 +7,7 @@ import {userId} from '../../jwt'
 import Paper from 'material-ui/Paper'
 import Board from './Board'
 import './GameDetails.css'
+import * as _ from 'lodash';
 
 class GameDetails extends PureComponent {
 
@@ -45,6 +46,76 @@ class GameDetails extends PureComponent {
   }
 
 
+  // determine available range of movement
+  findPlayerRanges = (board) => {
+
+    let rangeMap = _.cloneDeep(board)
+    for (var i = 0; i < rangeMap.length; i++) {
+      for (var j = 0; j < rangeMap[i].length; j++) {
+        rangeMap[i][j] = [false, false]
+      }
+    }
+
+    const playerOrb = [ [1, 0], [0, 1], [1, 1], [0,-1], [1,-1] ]
+
+    board.forEach(
+      function(row, i) {
+        row.forEach( function(square, j) {
+          if (square === '1') { 
+            playerOrb.forEach( function(offset) {
+              if (0 <= i+offset[0] && i+offset[0] < board[0].length && 0 <= j+offset[1] && j+offset[1] < board.length && board[i+offset[0]][j+offset[1]] !== '2' ) {
+                rangeMap[i+offset[0]][j+offset[1]][0] = true
+              }
+            })
+          }
+          if (square === '2') { 
+            playerOrb.forEach( function(offset) {
+              if (0 <= i-offset[0] && i-offset[0] < board[0].length && 0 <= j+offset[1] && j+offset[1] < board.length && board[i-offset[0]][j+offset[1]] !== '1' ) {
+                rangeMap[i-offset[0]][j+offset[1]][1] = true
+              }
+            })
+          }
+        })
+      }
+    )
+
+    return rangeMap
+  }
+
+  // determine available range of movement
+  findDangerLevels = (board) => {
+
+    let dangerLevels = { '1':0, '2':0 }
+
+    const level1Orb = [ [1,-2],[1,2],[2,-1],[2,0],[2,1] ]
+    const level2Orb = [ [1,-1],[1,0],[1,1] ]
+
+    board.forEach(function(row, i) {
+      row.forEach( function(square, j) {
+        if (square === '1' || square === '2') { 
+
+          level1Orb.forEach( function(offset) {
+            const checkX = square === '1' ? i+offset[0] : i-offset[0]
+            const checkY = j+offset[1]
+            if (checkX >= 0 && checkX < board[0].length && checkY >= 0 && checkY<board.length && board[checkX][checkY] === '*') {
+              dangerLevels[square] = 1
+            }
+          })
+
+          level2Orb.forEach( function(offset) {
+            const checkX = square === '1' ? i+offset[0] : i-offset[0]
+            const checkY = j+offset[1]
+            if (checkX >= 0 && checkX < board[0].length && checkY >= 0 && checkY<board.length && board[checkX][checkY] === '*') {
+              dangerLevels[square] = 2
+            }
+          })
+
+        }
+      })
+    })
+    return dangerLevels
+  }
+
   render() {
     const {game, users, authenticated, userId} = this.props
 
@@ -64,11 +135,20 @@ class GameDetails extends PureComponent {
 
     return (<div className="outer-paper">
       <div id="messages">
-      <p>Status: {game.status}</p>
+       { // <p>Status: {game.status}</p>
+          }
       {
         game.status === 'started' &&
-        player && player.id == game.currentPlayer &&
-        <div>It's your turn!</div>
+        player && player.id == game.currentPlayer && this.findDangerLevels(game.board)[currentPlayer] === 2 &&
+        <div>Watch out!  Mines Directly Ahead!</div>
+      }{
+        game.status === 'started' &&
+        player && player.id == game.currentPlayer && this.findDangerLevels(game.board)[currentPlayer] === 1 &&
+        <div>Mines are in your vicinity.</div>
+      }{
+        game.status === 'started' &&
+        player && player.id == game.currentPlayer && this.findDangerLevels(game.board)[currentPlayer] === 0 &&
+        <div>All clear - go ahead!</div>
       }
 
       {
@@ -85,7 +165,7 @@ class GameDetails extends PureComponent {
       </div>
       {
         game.status !== 'pending' &&
-        <div id="gameBoard"><Board currentPlayer={currentPlayer} board={game.board} makeMove={this.makeMove} /></div>
+        <div id="gameBoard"><Board currentPlayer={currentPlayer} board={game.board} makeMove={this.makeMove} findDangerLevels={this.findDangerLevels} findPlayerRanges={this.findPlayerRanges}  /></div>
       }
     </div>)
   }
