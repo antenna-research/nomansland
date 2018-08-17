@@ -10,5 +10,9 @@
 }
 
 .message {
-  color: green;
+  color: #ffffff;
+  font-family: fantasy, sans-serif;
+  font-size: 30px;
+  font-weight: bold;
+  text-align: center;
 }
