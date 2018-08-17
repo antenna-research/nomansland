@@ -12,6 +12,9 @@ const renderCel = (makeMove, rowIndex, cellIndex, symbol, playerAccess, currentP
   if (symbol == '1') { player = ' player1' }
   if (symbol == '2') { player = ' player2' }
 
+  let isCurrentPlayer = ''
+  if (symbol == currentPlayer) { isCurrentPlayer = ' currentPlayer' }
+
   // determine available range of movement
   let orb = ''
   if (playerAccess) { orb = ' player-' + currentPlayer + '-orb' }
@@ -28,13 +31,13 @@ const renderCel = (makeMove, rowIndex, cellIndex, symbol, playerAccess, currentP
       onClick={() => makeMove(rowIndex, cellIndex)}
     >·</button>
     { symbol == '2' && 
-    <svg viewBox="0 0 25 50" className={'player2'}>
+    <svg viewBox="0 0 25 50" className={'player2' + isCurrentPlayer}>
       <circle cx="8" cy="6" r="5" />
       <path d="M8,10 L8,20 L3,30 M8,20 L13,30 M0,15 L15,15"></path>
     </svg>
     }
     { symbol == '1' && 
-    <svg viewBox="0 0 25 50" className={'player1'}>
+    <svg viewBox="0 0 25 50" className={'player1' + isCurrentPlayer}>
       <circle cx="8" cy="6" r="5" />
       <path d="M8,10 L8,20 L3,30 M8,20 L13,30 M0,15 L15,15"></path>
     </svg>
@@ -119,7 +122,6 @@ const findDangerLevels = (board) => {
   })
   return dangerLevels
 }
-
 
 
 export default ({currentPlayer, board, makeMove}) => {
