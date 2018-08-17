@@ -1,3 +1,13 @@
+div.outer-paper {
+}
+
+div#messages {
+  position: absolute;
+  color: white;
+  font-weight: bold;
+  z-index: 3;
+}
+
 #gameBoard {
   display: inline-block;
   background-image: url("../images/forest.jpg");
@@ -23,7 +33,7 @@
 }
 
 .covered {
-  opacity: 0.4
+  opacity: 0.5
 }
 
 .uncovered {
@@ -51,27 +61,27 @@
 }
 
 #gameBoard .medium-danger svg.player1 {
-      animation: colorchange 3000ms infinite alternate;
-      -webkit-animation: colorchange 3000ms infinite alternate;
+      animation: colorchange 1500ms infinite alternate;
+      -webkit-animation: colorchange 1500ms infinite alternate;
     }
 
     @keyframes colorchange
     {
       0%   {stroke: #FFFF00;}
-      70%  {stroke: #FFFF00;}
+      88%  {stroke: #FFFF00;}
       100% {stroke: #FF0000;}
     }
 
     @-webkit-keyframes colorchange /* Safari and Chrome - necessary duplicate */
     {
       0%   {stroke: #FFFF00;}
-      70%  {stroke: #FFFF00;}
+      88%  {stroke: #FFFF00;}
       100% {stroke: #FF0000;}
     }
 
 #gameBoard .high-danger svg.player1 {
-      animation: colorchange 500ms infinite alternate;
-      -webkit-animation: colorchange 500ms infinite alternate;
+      animation: colorchange 250ms infinite;
+      -webkit-animation: colorchange 250ms infinite;
     }
 
     @keyframes colorchange
@@ -93,8 +103,8 @@
 }
 
 #gameBoard .medium-danger svg.player2 {
-      animation: colorchange 3000ms infinite alternate;
-      -webkit-animation: colorchange 3000ms infinite alternate;
+      animation: colorchange 1500ms infinite alternate;
+      -webkit-animation: colorchange 1500ms infinite alternate;
     }
 
     @keyframes colorchange
@@ -112,8 +122,8 @@
     }
 
 #gameBoard .high-danger svg.player2 {
-      animation: colorchange 500ms infinite alternate;
-      -webkit-animation: colorchange 500ms infinite alternate;
+      animation: colorchange 250ms infinite;
+      -webkit-animation: colorchange 250ms infinite;
     }
 
     @keyframes colorchange

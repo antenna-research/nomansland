@@ -1,7 +1,11 @@
 .outer-paper {
-  margin-top: 20px;
-  margin: auto;
-  padding: 20px;
-  width: 60%;
+  display: flex;
+  justify-content: center;
+  margin: 0 auto;
+  padding: 0px;
+  width: 100%;
+  position: relative;
+  top: -74px;
+  z-index: 40;
 }
 

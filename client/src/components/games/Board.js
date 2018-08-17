@@ -47,13 +47,6 @@ const renderCel = (makeMove, rowIndex, cellIndex, symbol, playerAccess, currentP
   </span>
   )
 }
-// <defs>
-//   <filter id="filter1" x="0" y="0">
-//     <feOffset result="offOut" in="SourceAlpha" dx="-5" dy="-5" />
-//     <feGaussianBlur result="blurOut" in="offOut" stdDeviation="3" />
-//     <feBlend in="SourceGraphic" in2="blurOut" mode="normal" />
-//   </filter>
-// </defs>
 
 
 // determine available range of movement
@@ -98,15 +91,15 @@ const findDangerLevels = (board) => {
 
   let dangerLevels = { '1':0, '2':0 }
 
-  const level1Orb = [ [-2,-2],[-2,-1],[-2,0],[-2,1],[-2,2],[-1,-2],[-1,2],[0,-2],[0,2],[1,-2],[1,2],[2,-2],[2,-1],[2,0],[2,1],[2,2] ]
-  const level2Orb = [ [-1,-1],[-1,0],[-1,1],[0,-1],[0, 1],[1,-1],[1, 0],[1, 1] ]
+  const level1Orb = [ [1,-2],[1,2],[2,-1],[2,0],[2,1] ]
+  const level2Orb = [ [1,-1],[1,0],[1,1] ]
 
   board.forEach(function(row, i) {
     row.forEach( function(square, j) {
       if (square === '1' || square === '2') { 
 
         level1Orb.forEach( function(offset) {
-          const checkX = i+offset[0]
+          const checkX = square === '1' ? i+offset[0] : i-offset[0]
           const checkY = j+offset[1]
           if (checkX >= 0 && checkX < board[0].length && checkY >= 0 && checkY<board.length && board[checkX][checkY] === '*') {
             dangerLevels[square] = 1
@@ -114,12 +107,13 @@ const findDangerLevels = (board) => {
         })
 
         level2Orb.forEach( function(offset) {
-          const checkX = i+offset[0]
+          const checkX = square === '1' ? i+offset[0] : i-offset[0]
           const checkY = j+offset[1]
           if (checkX >= 0 && checkX < board[0].length && checkY >= 0 && checkY<board.length && board[checkX][checkY] === '*') {
             dangerLevels[square] = 2
           }
         })
+
       }
     })
   })
