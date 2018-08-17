@@ -78,7 +78,7 @@ class GameDetails extends PureComponent {
       }
 
       {
-        winner &&
+        winner && player.userId === winner &&
         <p className="message">Congratulations {users[winner].firstName}!!! You won the game</p>
       }
 
