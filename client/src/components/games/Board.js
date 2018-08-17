@@ -55,7 +55,6 @@ const renderCel = (makeMove, rowIndex, cellIndex, symbol, playerAccess, currentP
   )
 }
 
-
 export default ({currentPlayer, board, makeMove, findDangerLevels, findPlayerRanges, gameStatus}) => {
 
   const playerRangeMap = findPlayerRanges(board)
